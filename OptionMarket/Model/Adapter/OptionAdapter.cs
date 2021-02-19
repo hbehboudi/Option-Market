@@ -7,7 +7,11 @@ namespace OptionMarket.Model.Adapter
 {
     internal class OptionAdapter
     {
-        public Option Create(DataRow row, List<Stock> stocks)
+        private readonly List<Stock> stocks;
+
+        public OptionAdapter(List<Stock> stocks) => this.stocks = stocks;
+
+        public Option Create(DataRow row)
         {
             var name = row[ConstValues.NameColumn].ToString();
             var description = row[ConstValues.DescriptionColumn].ToString();
@@ -17,10 +21,8 @@ namespace OptionMarket.Model.Adapter
                 return null;
             }
 
-            var stockBase = stocks.First(x => description.Contains(x.Name));
-
-            var firstSeparator = description.IndexOf('-');
-            var secondSeparator = description.LastIndexOf('-');
+            var firstSeparator = description.IndexOf(ConstValues.Separator);
+            var secondSeparator = description.LastIndexOf(ConstValues.Separator);
             var length = secondSeparator - firstSeparator - 1;
 
             return new Option
@@ -41,18 +43,18 @@ namespace OptionMarket.Model.Adapter
 
         private static bool IsOption(string name, string description)
         {
-            if (!name.StartsWith("ض") && !name.StartsWith("ط"))
+            if (!name.StartsWith(ConstValues.BuyFirstLetter) && !name.StartsWith(ConstValues.SellFirstLetter))
             {
                 return false;
             }
 
-            if (!description.Contains('-'))
+            if (!description.Contains(ConstValues.Separator))
             {
                 return false;
             }
 
-            var firstSeparator = description.IndexOf('-');
-            var secondSeparator = description.LastIndexOf('-');
+            var firstSeparator = description.IndexOf(ConstValues.Separator);
+            var secondSeparator = description.LastIndexOf(ConstValues.Separator);
 
             return firstSeparator != secondSeparator;
         }

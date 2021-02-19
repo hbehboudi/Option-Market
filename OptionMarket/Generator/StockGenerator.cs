@@ -10,10 +10,11 @@ namespace OptionMarket.Generator
         public List<Stock> Generate(DataTable table)
         {
             var stocks = new List<Stock>();
-
+            var stockAdapter = new StockAdapter();
+            
             for (var i = ConstValues.FirstRow; i < table.Rows.Count; i++)
             {
-                var stock = new StockAdapter().Create(table.Rows[i]);
+                var stock = stockAdapter.Create(table.Rows[i]);
                 stocks.Add(stock);
             }
 

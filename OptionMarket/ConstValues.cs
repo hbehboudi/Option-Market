@@ -15,7 +15,11 @@
         public static int SellVolumeColumn = 21;
 
         public static string OptionString = "اختيار";
+        public static string BuyFirstLetter = "ض";
+        public static string SellFirstLetter = "ط";
 
         public static int FirstRow = 3;
+
+        public static string Separator = "-";
     }
 }
