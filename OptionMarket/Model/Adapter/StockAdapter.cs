@@ -12,6 +12,7 @@ namespace OptionMarket.Model.Adapter
                 Description = row[ConstValues.DescriptionColumn].ToString(),
                 Volume = row[ConstValues.VolumeColumn].ConvertToLong(),
                 Price = row[ConstValues.PriceColumn].ConvertToLong(),
+                FinalPrice = row[ConstValues.FinalPriceColumn].ConvertToLong(),
                 BuyVolume = row[ConstValues.BuyVolumeColumn].ConvertToLong(),
                 BuyPrice = row[ConstValues.BuyPriceColumn].ConvertToLong(),
                 SellPrice = row[ConstValues.SellPriceColumn].ConvertToLong(),

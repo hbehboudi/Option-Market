@@ -1,25 +1,29 @@
 ﻿namespace OptionMarket
 {
-    internal static class ConstValues
+    internal class ConstValues
     {
-        public static string Path = @$"C:/Users/Hossein/Downloads/";
-        public static string Name = "MarketWatchPlus-1399_11_30 (3).xlsx";
+        public const string InputPath = @"C:/Users/Hossein/Downloads/MarketWatchPlus-1399_12_6.xlsx";
+        public const string OutputPath = @"C:/Users/Hossein/Desktop/Output.csv";
 
-        public static int NameColumn = 0;
-        public static int DescriptionColumn = 1;
-        public static int VolumeColumn = 3;
-        public static int PriceColumn = 7;
-        public static int BuyVolumeColumn = 18;
-        public static int BuyPriceColumn = 19;
-        public static int SellPriceColumn = 20;
-        public static int SellVolumeColumn = 21;
+        public const int NameColumn = 0;
+        public const int DescriptionColumn = 1;
+        public const int VolumeColumn = 3;
+        public const int PriceColumn = 7;
+        public const int FinalPriceColumn = 10;
+        public const int BuyVolumeColumn = 18;
+        public const int BuyPriceColumn = 19;
+        public const int SellPriceColumn = 20;
+        public const int SellVolumeColumn = 21;
 
-        public static string OptionString = "اختيار";
-        public static string BuyFirstLetter = "ض";
-        public static string SellFirstLetter = "ط";
+        public const string OptionString = "اختيار";
+        public const string BuyFirstLetter = "ض";
+        public const string SellFirstLetter = "ط";
 
-        public static int FirstRow = 3;
+        public const int FirstRow = 3;
 
-        public static string Separator = "-";
+        public const string Separator = "-";
+
+        public const string Header = "نام,توضیحات,سهم پایه,قیمت اعمال,قیمت تمام شده,قیمت,حجم," +
+            "قیمت فروش,حجم فروش,قیمت خرید,حجم خرید,اهرم,بی‌تفاوتی,سربه‌سری";
     }
 }
