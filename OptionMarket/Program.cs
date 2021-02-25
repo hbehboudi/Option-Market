@@ -11,19 +11,19 @@ namespace OptionMarket
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            var path = ConstValues.Path + ConstValues.Name;
+            var inputPath = ConstValues.InputPath;
 
-            if (!File.Exists(path))
+            if (!File.Exists(inputPath))
             {
                 throw new FileNotFoundException();
             }
 
-            var stream = File.Open(path, FileMode.Open, FileAccess.Read);
+            var stream = File.Open(inputPath, FileMode.Open, FileAccess.Read);
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             var table = excelReader.AsDataSet().Tables[0];
 
             var options = new OptionGenerator().Generate(table);
-
+            new CsvExporter().Export(ConstValues.OutputPath, options);
         }
     }
 }

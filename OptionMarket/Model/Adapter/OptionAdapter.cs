@@ -25,14 +25,17 @@ namespace OptionMarket.Model.Adapter
             var secondSeparator = description.LastIndexOf(ConstValues.Separator);
             var length = secondSeparator - firstSeparator - 1;
 
+            var baseName = description.Substring(0, description.IndexOf(ConstValues.Separator));
+
             return new Option
             {
                 Name = name,
                 Description = description,
-                stock = stocks.First(x => description.Contains(x.Name)),
+                Stock = stocks.First(x => baseName.Substring(baseName.IndexOf(" ") + 1).Equals(x.Name)),
                 Volume = row[ConstValues.VolumeColumn].ConvertToLong(),
                 DueDate = description.Substring(secondSeparator + 1),
                 Price = row[ConstValues.PriceColumn].ConvertToLong(),
+                FinalPrice = row[ConstValues.FinalPriceColumn].ConvertToLong(),
                 PriceApply = description.Substring(firstSeparator + 1, length).ConvertToLong(),
                 BuyVolume = row[ConstValues.BuyVolumeColumn].ConvertToLong(),
                 BuyPrice = row[ConstValues.BuyPriceColumn].ConvertToLong(),
@@ -43,7 +46,8 @@ namespace OptionMarket.Model.Adapter
 
         private static bool IsOption(string name, string description)
         {
-            if (!name.StartsWith(ConstValues.BuyFirstLetter) && !name.StartsWith(ConstValues.SellFirstLetter))
+            if (!name.StartsWith(ConstValues.BuyFirstLetter) &&
+                !name.StartsWith(ConstValues.SellFirstLetter))
             {
                 return false;
             }
