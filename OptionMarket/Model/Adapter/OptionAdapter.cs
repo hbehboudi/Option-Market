@@ -31,9 +31,9 @@ namespace OptionMarket.Model.Adapter
             {
                 Name = name,
                 Description = description,
-                Stock = stocks.First(x => baseName.Substring(baseName.IndexOf(" ") + 1).Equals(x.Name)),
+                Stock = stocks.First(x => baseName[(baseName.IndexOf(" ") + 1)..].Equals(x.Name)),
                 Volume = row[ConstValues.VolumeColumn].ConvertToLong(),
-                DueDate = description.Substring(secondSeparator + 1),
+                DueDate = description[(secondSeparator + 1)..],
                 Price = row[ConstValues.PriceColumn].ConvertToLong(),
                 FinalPrice = row[ConstValues.FinalPriceColumn].ConvertToLong(),
                 PriceApply = description.Substring(firstSeparator + 1, length).ConvertToLong(),
