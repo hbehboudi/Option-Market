@@ -1,12 +1,31 @@
-﻿namespace OptionMarket
+﻿using Microsoft.Extensions.Configuration;
+using System;
+
+namespace OptionMarket
 {
     internal class ConstValues
     {
-        public const string InputPath = @"C:/Users/Hossein/Downloads/MarketWatchPlus-1399_12_6.xlsx";
-        public const string OutputPath = @"C:/Users/Hossein/Desktop/Output.csv";
+        public static IConfigurationRoot configuration = 
+            new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-        public const string XlsxExtension = ".xlsx";
-        public const string CsvExtension = ".csv";
+        public static string InputPath = configuration.GetValue<string>("InputPath");
+        public static string OutputPath = configuration.GetValue<string>("OutputPath");
+
+        public static string XlsxExtension = configuration.GetValue<string>("XlsxExtension");
+        public static string CsvExtension = configuration.GetValue<string>("CsvExtension");
+
+        public static string OptionString = configuration.GetValue<string>("OptionString");
+        public static string BuyFirstLetter = configuration.GetValue<string>("BuyFirstLetter");
+        public static string SellFirstLetter = configuration.GetValue<string>("SellFirstLetter");
+
+        public static string Separator = configuration.GetValue<string>("Separator");
+
+        public static string Header = configuration.GetValue<string>("Header");
+
+        public const int FirstRow = 3;
 
         public const int NameColumn = 0;
         public const int DescriptionColumn = 1;
@@ -17,16 +36,5 @@
         public const int BuyPriceColumn = 19;
         public const int SellPriceColumn = 20;
         public const int SellVolumeColumn = 21;
-
-        public const string OptionString = "اختيار";
-        public const string BuyFirstLetter = "ض";
-        public const string SellFirstLetter = "ط";
-
-        public const int FirstRow = 3;
-
-        public const string Separator = "-";
-
-        public const string Header = "نام,توضیحات,سهم پایه,قیمت اعمال,قیمت تمام شده,قیمت,حجم," +
-            "قیمت فروش,حجم فروش,قیمت خرید,حجم خرید,اهرم,بی‌تفاوتی,سربه‌سری";
     }
 }
