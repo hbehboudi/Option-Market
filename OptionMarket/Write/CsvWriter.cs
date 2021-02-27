@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace OptionMarket
+namespace OptionMarket.Write
 {
-    internal class CsvExporter
+    internal class CsvWriter : IWriter
     {
-        public void Export(string path, List<Option> options)
+        public void Write(string path, List<Option> options)
         {
             var streamWriter = new StreamWriter(path);
 

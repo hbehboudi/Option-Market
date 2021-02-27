@@ -5,6 +5,9 @@
         public const string InputPath = @"C:/Users/Hossein/Downloads/MarketWatchPlus-1399_12_6.xlsx";
         public const string OutputPath = @"C:/Users/Hossein/Desktop/Output.csv";
 
+        public const string XlsxExtension = ".xlsx";
+        public const string CsvExtension = ".csv";
+
         public const int NameColumn = 0;
         public const int DescriptionColumn = 1;
         public const int VolumeColumn = 3;

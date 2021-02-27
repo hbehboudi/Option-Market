@@ -1,7 +1,11 @@
-﻿using ExcelDataReader;
-using OptionMarket.Generator;
-using System.IO;
+﻿using OptionMarket.Generator;
 using System.Text;
+using System.IO;
+using OptionMarket.Read;
+using System.Data;
+using OptionMarket.Write.Factory;
+using System.Collections.Generic;
+using OptionMarket.Model;
 
 namespace OptionMarket
 {
@@ -10,20 +14,23 @@ namespace OptionMarket
         internal static void Main(string[] args)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            var inputPath = ConstValues.InputPath;
-
-            if (!File.Exists(inputPath))
-            {
-                throw new FileNotFoundException();
-            }
-
-            var stream = File.Open(inputPath, FileMode.Open, FileAccess.Read);
-            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            var table = excelReader.AsDataSet().Tables[0];
-
+            var table = ReadDataTable();
             var options = new OptionGenerator().Generate(table);
-            new CsvExporter().Export(ConstValues.OutputPath, options);
+            WriteOptions(options);
+        }
+
+        private static DataTable ReadDataTable()
+        {
+            var inputPath = ConstValues.InputPath;
+            var fileExtension = new FileInfo(inputPath).Extension;
+            return new ReaderFactory().Create(fileExtension).Read(inputPath);
+        }
+
+        private static void WriteOptions(List<Option> options)
+        {
+            var outputPath = ConstValues.OutputPath;
+            var fileExtension = new FileInfo(outputPath).Extension;
+            new WriterFactory().Create(fileExtension).Write(outputPath, options);
         }
     }
 }
